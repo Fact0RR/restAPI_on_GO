@@ -5,10 +5,14 @@ import (
 
 	rest "github.com/Ubludor/restAPI_on_GO"
 	"github.com/Ubludor/restAPI_on_GO/pkg/handler"
+	"github.com/Ubludor/restAPI_on_GO/pkg/repository"
+	"github.com/Ubludor/restAPI_on_GO/pkg/service"
 )
 
 func main() {
-	handlers := new(handler.Handler)
+	repos := repository.NewRepository()
+	services := service.NewService(repos)
+	handlers := handler.NewHandler(services)
 
 	srv := new(rest.Server)
 
